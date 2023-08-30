@@ -1,0 +1,6 @@
+version: '3'
+services:
+  my_app:
+    image: test2
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
