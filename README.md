@@ -18,5 +18,5 @@ My favourite issues were:
 
 
  My Experience:
-  I loved the challenge. I want to install stable diffusion. Play more with AI. I noticed that there is a massive gap in quality between models. This challenge had shown me that programming is not that hard and gave me confidence to apply in other senior programming positions. Start might be rough, but fundamentally coding and solving programming challenges isn't too difficult compared to my current job.
+  I loved the challenge. I want to install stable diffusion. Play more with AI. I noticed that there is a massive gap in quality between models. This challenge had shown me that programming is not that hard and gave me confidence to apply in other senior programming positions. Start might be rough, but fundamentally coding and solving programming challenges isn't too difficult compared to my current occupation. 
   
