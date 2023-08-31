@@ -37,9 +37,6 @@ def home():
 def rephrase_prompt(text, num_values):
     rephrased_texts = []
 
-def rephrase_prompt(text, num_values):
-    rephrased_texts = []
-
     def rephrase_single(prompt):
         response = openai.Completion.create(
             engine="text-davinci-003",
@@ -63,6 +60,7 @@ def rephrase_prompt(text, num_values):
 @app.route('/rephraser', methods=['GET', 'POST'])
 @auth_required
 def rephraser():
+
     if request.method == 'POST':
         description = request.form.get('description')
         num_values = int(request.form.get('num_values'))
@@ -70,30 +68,6 @@ def rephraser():
         return render_template('result.html', rephrased_responses=rephrased_responses)
 
     return render_template('index.html')
-
-
-@app.route('/content_generation', methods=['GET', 'POST'])
-@auth_required
-def content_generation():
-    if request.method == 'POST':
-        # Process form data and generate sections
-        description = request.form.get('description')
-        section_names = request.form.getlist('section_name[]')
-        titles = request.form.getlist('title[]')
-        descriptions = request.form.getlist('description[]')
-
-        # Process other input fields and generate sections...
-        sections = {}
-        for i, section_name in enumerate(section_names):
-            sections[section_name] = {
-                "title": titles[i],
-                "description": descriptions[i]
-            }
-
-        # Render the result page with the generated sections
-        return render_template('content_generation_result.html', generated_sections=sections)
-
-    return render_template('content_generation.html')  # Display the input form for GET requests
 
 
 def generate_section_content(business_description, section_name, language):
@@ -122,9 +96,9 @@ def generate_section_content(business_description, section_name, language):
 
 
 # Your generate_section_content function here...
-
-@app.route('/content_generator', methods=['GET', 'POST'])
-def content_generator():
+@app.route('/content_generation', methods=['GET', 'POST'])
+@auth_required
+def content_generation():
     if request.method == 'POST':
         # Process form data and get field values
         about_title = request.form.get('about_title')
@@ -151,6 +125,10 @@ def content_generator():
 
         for section_name, title, description in sections:
             section_content = generate_section_content(description, section_name, language)  # Pass the language
+            print(f"Section Name: {section_name}")
+            print(f"Title: {title}")
+            print(f"Description: {description}")
+            print(f"Section Content:\n\n{section_content.strip()}\n\n")
             generated_sections.append((section_name, title, description, section_content))
 
         return render_template('content_generation_result.html', generated_sections=generated_sections)
@@ -159,5 +137,6 @@ def content_generator():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0")
+    app.run(debug=True, host="0.0.0.0")
+
 
